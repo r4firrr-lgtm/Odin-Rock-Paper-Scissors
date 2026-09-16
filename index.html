@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+        let humanSelection = undefined;
+        let computerSelection = undefined;
+        function playRound(humanChoice, computerChoice){
+            if(humanChoice=="rock"&&computerChoice=="scissor"){
+                humanScore += 1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Human Wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="rock"&&computerChoice=="rock"){
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            It's a draw!
+                            The score is still ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="rock"&&computerChoice=="paper"){
+                computerScore+=1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Computer wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }
+            else if(humanChoice=="paper"&&computerChoice=="rock"){
+                humanScore += 1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Human Wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="paper"&&computerChoice=="paper"){
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            It's a draw!
+                            The score is still ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="paper"&&computerChoice=="scissor"){
+                computerScore+=1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Computer wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="scissor"&&computerChoice=="paper"){
+                humanScore += 1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Human Wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="scissor"&&computerChoice=="scissor"){
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            It's a draw!
+                            The score is still ${humanScore}- ${computerScore}
+                            `);
+            }else if(humanChoice=="scissor"&&computerChoice=="rock"){
+                computerScore+=1;
+                console.log(`Human picked ${humanChoice}
+                            Computer picked ${computerChoice}
+                            Computer wins this round!
+                            The score now is ${humanScore}- ${computerScore}
+                            `);
+            }
+        }
+        function playGame(){
+            console.log("Welcome to rock-paper-scissor game! ")
+            for(let i=1;i<6;i++){
+                console.log("Round "+i);
+                humanSelection  = getHumanChoice();
+                computerSelection = getComputerChoice();
+                playRound(humanSelection, computerSelection);
+            }
+            console.log(`The final Score is Human - Computer : {$humanScore} - {$computerScore}`);
+            if(humanScore>computerScore){
+                console.log("Human wins the game!");
+            }else{
+                console.log("Computer wins the game!");
+            }
+        }
+        function getHumanChoice(){
+            do{
+                humanSelection = prompt("What's your choice? Rock/Paper/Scissor? ");
+            }while(humanSelection.toLowerCase()!="rock" && humanSelection.toLowerCase()!="paper" && humanSelection.toLowerCase()!="scissor");
+            return humanSelection;
+        }
+        function getComputerChoice(){
+            console.log("Computer is Picking!")
+            let computerChoiceINT= Math.floor(Math.random()*3);
+            let computerChoice = undefined;
+            if (computerChoiceINT == 0){
+                computerChoice = "rock";
+            }else if(computerChoiceINT == 1){
+                computerChoice = "paper";
+            }else {
+                computerChoice = "scissor";
+            }
+            return computerChoice;
+        }
+        playGame();
+    </script>
+</body>
+</html>
