@@ -4,97 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="human-choice">
+        <button id="rock">rock</button>
+        <button id="paper">paper</button>
+        <button id="scissor">scissor</button>
+    </div>
+        <p class="result"></p>
     <script>
         let humanScore = 0;
         let computerScore = 0;
-        let humanSelection = undefined;
+        let round = 0;
         let computerSelection = undefined;
+        const rock = document.querySelector("#rock")
+        const paper = document.querySelector("#paper")
+        const scissor = document.querySelector("#scissor")
+        const result = document.querySelector(".result");
+        rock.addEventListener("click", () => {
+         playGame("rock");
+        });
+        paper.addEventListener("click", () => {
+            playGame("paper");
+        });
+
+        scissor.addEventListener("click", () => {
+            playGame("scissor");
+        });
+        //result.innerHTML = `Human picked ${humanChoice}<br>
+//Computer picked ${computerChoice}<br>
+//Computer wins!`;
+
         function playRound(humanChoice, computerChoice){
             if(humanChoice=="rock"&&computerChoice=="scissor"){
                 humanScore += 1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Human Wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Human wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="rock"&&computerChoice=="rock"){
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            It's a draw!
-                            The score is still ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                It's a draw!
+                The score is still ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="rock"&&computerChoice=="paper"){
                 computerScore+=1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Computer wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Computer wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }
             else if(humanChoice=="paper"&&computerChoice=="rock"){
                 humanScore += 1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Human Wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Human wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="paper"&&computerChoice=="paper"){
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            It's a draw!
-                            The score is still ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                It's a draw!
+                The score is still ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="paper"&&computerChoice=="scissor"){
                 computerScore+=1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Computer wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Computer wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="scissor"&&computerChoice=="paper"){
                 humanScore += 1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Human Wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Human wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="scissor"&&computerChoice=="scissor"){
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            It's a draw!
-                            The score is still ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                It's a draw!
+                The score is still ${humanScore}- ${computerScore}`;
             }else if(humanChoice=="scissor"&&computerChoice=="rock"){
                 computerScore+=1;
-                console.log(`Human picked ${humanChoice}
-                            Computer picked ${computerChoice}
-                            Computer wins this round!
-                            The score now is ${humanScore}- ${computerScore}
-                            `);
+                result.innerText = `Human picked ${humanChoice}
+                Computer picked ${computerChoice}
+                Computer wins this round!
+                The score now is ${humanScore}- ${computerScore}`;
             }
         }
-        function playGame(){
-            console.log("Welcome to rock-paper-scissor game! ")
-            for(let i=1;i<6;i++){
-                console.log("Round "+i);
-                humanSelection  = getHumanChoice();
-                computerSelection = getComputerChoice();
-                playRound(humanSelection, computerSelection);
+        function playGame(humanChoice) {
+            round++;
+
+            computerSelection = getComputerChoice();
+            playRound(humanChoice, computerSelection);
+
+            if (round === 5) {
+                if (humanScore > computerScore) {
+                    result.innerText += `\n\nGame over! Human wins the game!`;
+                } else if (computerScore > humanScore) {
+                    result.innerText += `\n\nGame over! Computer wins the game!`;
+                } else {
+                    result.innerText += `\n\nGame over! It's a draw!`;
+                }
+
+                round = 0;
+                humanScore = 0;
+                computerScore = 0;
             }
-            console.log(`The final Score is Human - Computer : {$humanScore} - {$computerScore}`);
-            if(humanScore>computerScore){
-                console.log("Human wins the game!");
-            }else{
-                console.log("Computer wins the game!");
-            }
-        }
-        function getHumanChoice(){
-            do{
-                humanSelection = prompt("What's your choice? Rock/Paper/Scissor? ");
-            }while(humanSelection.toLowerCase()!="rock" && humanSelection.toLowerCase()!="paper" && humanSelection.toLowerCase()!="scissor");
-            return humanSelection;
         }
         function getComputerChoice(){
             console.log("Computer is Picking!")
@@ -109,7 +124,7 @@
             }
             return computerChoice;
         }
-        playGame();
+        playGame(humanChoice);
     </script>
 </body>
 </html>
